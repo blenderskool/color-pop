@@ -12,6 +12,8 @@ export const colorpop = functions
     }
     
     switch (req.get('content-type')) {
+      case 'image/webp':
+      case 'image/tiff':
       case 'image/jpeg':
       case 'image/png':
         const output = await pop(req.rawBody, {
@@ -24,6 +26,6 @@ export const colorpop = functions
         break;
 
       default:
-        break;
+        res.status(415).send('Unsupported image type').end();
     }
   });
