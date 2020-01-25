@@ -8,7 +8,8 @@ export const colorpop = functions
   .https
   .onRequest(async (req, res) => {
     if (req.method !== 'POST') {
-      return res.status(405).send('Request method not allowed').end();
+      res.status(405).send('Request method not allowed').end();
+      return;
     }
     
     switch (req.get('content-type')) {

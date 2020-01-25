@@ -46,7 +46,7 @@ async function loadModel(model: string): Promise<bodyPix.BodyPix> {
       return bpResnet;
 
     default:
-      throw 'Invalid model';
+      throw new Error('Invalid model');
   }
 }
 
