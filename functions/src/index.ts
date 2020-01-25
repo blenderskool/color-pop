@@ -15,7 +15,7 @@ export const colorpop = functions
       case 'image/jpeg':
       case 'image/png':
         const output = await pop(req.rawBody, {
-          model: req.query.model
+          model: req.query.model || 'mobilenet',
         });
         const outputBuf = await output.toBuffer();
     

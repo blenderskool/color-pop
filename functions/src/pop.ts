@@ -56,9 +56,7 @@ async function loadModel(model: string): Promise<bodyPix.BodyPix> {
  * @param config Configuration settings
  * @returns Segmentation map image as a raw buffer
  */
-async function segment(image: sharp.Sharp, config: PopConfig = {
-  model: 'mobilenet',
-}): Promise<Buffer> {
+async function segment(image: sharp.Sharp, config: PopConfig): Promise<Buffer> {
 
   const net = await loadModel(config.model);
   const mask: number[] = [];
@@ -89,7 +87,7 @@ async function segment(image: sharp.Sharp, config: PopConfig = {
  * @param config Configuration settings
  * @returns Image with color pop operation as Sharp instance
  */
-async function pop(imageBuf: Buffer, config?: PopConfig): Promise<sharp.Sharp> {
+async function pop(imageBuf: Buffer, config: PopConfig): Promise<sharp.Sharp> {
   const image = loadImage(imageBuf);
   const mask = await segment(image, config);
 
