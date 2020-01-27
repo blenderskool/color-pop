@@ -25,6 +25,9 @@ around people in images.
 
 It can be accessed using the `colorpop` cloud function once the project is deployed on [Firebase](https://firebase.google.com).
 
+## Deployment
+Instructions to [deploy this project on Firebase](https://github.com/blenderskool/color-pop/tree/master/functions)
+
 ## Options for `colorpop` cloud function
 The `colorpop` is an HTTP cloud function which can be accessed by making a `POST` request with the binary image data
 as the body of the request, along with following optional query params
