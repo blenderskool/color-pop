@@ -3,7 +3,9 @@
 The Color Pop(aka Color splash) effect makes the subject(usually a person) stand out from the rest of the image.
 The subject remains in color, but the background is made black and white. This gives a pleasant look in most cases.
 
-This app applies color pop effect on human subjects and supports images with many people.
+This app applies color pop effect on human subjects and supports images with many people.  
+[Here's an article](https://medium.com/@AkashHamirwasia/color-pop-effect-using-bodypix-and-tensorflow-js-a584ddc48a02)
+that I wrote explaining the working of this project at a basic level.
 
 ## Examples
 ### Image with one person
