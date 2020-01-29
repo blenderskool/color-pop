@@ -59,22 +59,11 @@ async function loadModel(model: string): Promise<bodyPix.BodyPix> {
 async function segment(image: sharp.Sharp, config: PopConfig): Promise<Buffer> {
 
   const net = await loadModel(config.model);
-  const mask: number[] = [];
   const { data, info } = await image.raw().toBuffer({ resolveWithObject: true });
   const input = tf.tensor3d(data, [ info.height, info.width, info.channels ]);
 
-  const results = await net.segmentMultiPerson(input, {
+  const { data:mask } = await net.segmentPerson(input, {
     internalResolution: 'full',
-  });
-
-  results.forEach(result => {
-    result.data.forEach((value, i) => {
-
-      if (!mask[i * 3]) {
-        for(let c=0; c<3; c++)
-          mask[i * 3 + c] = value;
-      }
-    });
   });
 
   return Buffer.from(mask);
@@ -99,7 +88,7 @@ async function pop(imageBuf: Buffer, config: PopConfig): Promise<sharp.Sharp> {
         const [ r, g, b ] = [ buffer[i], buffer[i+1], buffer[i+2] ];
         const gray = Math.trunc((0.3 * r) + (0.59 * g) + (0.11 * b));
 
-        [ buffer[i], buffer[i+1], buffer[i+2] ] = mask[i] === 0 ? [ gray, gray, gray ] : [ r, g, b ];
+        [ buffer[i], buffer[i+1], buffer[i+2] ] = mask[i/3] === 0 ? [ gray, gray, gray ] : [ r, g, b ];
       }
     
       return sharp(buffer, {
